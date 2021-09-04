@@ -9,22 +9,26 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
 
-    void Start() {
+    void Start()
+    {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
-    void Update() {
+    void Update()
+    {
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         UpdateAnimationAndMove();
     }
 
-    void UpdateAnimationAndMove() {
+    void UpdateAnimationAndMove()
+    {
         if (change != Vector3.zero)
         {
             MoveCharacter();
@@ -38,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void MoveCharacter() {
+    void MoveCharacter()
+    {
         rigidbody2d.MovePosition(transform.position + change * speed * Time.fixedDeltaTime);
     }
 }
