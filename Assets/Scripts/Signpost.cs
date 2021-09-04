@@ -10,6 +10,23 @@ public class Signpost : MonoBehaviour
     public string dialog;
     public bool playerInRange;
 
+    InputMaster inputMaster;
+    void Awake()
+    {
+        inputMaster = new InputMaster();
+        inputMaster.Player.Interaction.performed += ctx => ReadSignpost();
+    }
+
+    private void OnEnable()
+    {
+        inputMaster.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputMaster.Player.Disable();
+    }
+
     void Start()
     {
         
@@ -17,7 +34,12 @@ public class Signpost : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && playerInRange)
+
+    }
+
+    void ReadSignpost()
+    {
+        if (playerInRange)
         {
             if (dialogBox.activeInHierarchy)
             {

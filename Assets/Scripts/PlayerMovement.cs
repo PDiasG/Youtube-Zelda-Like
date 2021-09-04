@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,6 +9,25 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody2d;
     private Vector3 change;
     private Animator animator;
+
+    InputMaster inputMaster;
+
+    void Awake()
+    {
+        inputMaster = new InputMaster();
+        inputMaster.Player.Movement.performed += ctx => change = ctx.ReadValue<Vector2>();
+        inputMaster.Player.Movement.canceled += ctx => change = Vector3.zero;
+    }
+
+    private void OnEnable()
+    {
+        inputMaster.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputMaster.Player.Disable();
+    }
 
     void Start()
     {
@@ -17,9 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        change = Vector3.zero;
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
+
     }
 
     private void FixedUpdate()
@@ -46,4 +64,5 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody2d.MovePosition(transform.position + change * speed * Time.fixedDeltaTime);
     }
+
 }
