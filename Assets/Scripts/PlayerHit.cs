@@ -30,7 +30,7 @@ public class PlayerHit : MonoBehaviour
             other.GetComponent<Pot>().Smash();
         }
 
-        else if (other.gameObject.CompareTag("Enemy")|| other.gameObject.CompareTag("Player"))
+        else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
         {
             // Handles knockback
             Rigidbody2D rigidbody = other.GetComponent<Rigidbody2D>();
@@ -40,16 +40,21 @@ public class PlayerHit : MonoBehaviour
                 Vector2 diff = rigidbody.transform.position - transform.position;
                 rigidbody.AddForce(diff.normalized * thrust, ForceMode2D.Impulse);
 
-                // Only applies knockback once
-                if (other.gameObject.CompareTag("Enemy") && other.isTrigger && rigidbody.GetComponent<Enemy>().currentState != EnemyState.stagger)
+                // Deal damage to enemy
+                // Knockback is only applied once, and only player can damage enemy
+                if (gameObject.CompareTag("Player") && 
+                    other.gameObject.CompareTag("Enemy") && 
+                    other.isTrigger && 
+                    rigidbody.GetComponent<Enemy>().currentState != EnemyState.stagger)
                 {
                     rigidbody.GetComponent<Enemy>().currentState = EnemyState.stagger;
                     other.GetComponent<Enemy>().Knockback(rigidbody, knockbackTime, damage);
                 }
+
                 if (other.gameObject.CompareTag("Player") && rigidbody.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
                 {
                     rigidbody.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
-                    other.GetComponent<PlayerMovement>().Knockback(knockbackTime);
+                    other.GetComponent<PlayerMovement>().Knockback(knockbackTime, damage);
                 }
             }
         }

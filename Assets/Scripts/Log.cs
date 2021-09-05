@@ -27,7 +27,15 @@ public class Log : Enemy
 
     void FixedUpdate()
     {
-        CheckDistance();
+        if (target.gameObject.activeInHierarchy)
+        {
+            CheckDistance();
+        }
+        else
+        {
+            ChangeState(EnemyState.idle);
+            animator.SetBool("wakeUp", false);
+        }
     }
 
     void CheckDistance()
