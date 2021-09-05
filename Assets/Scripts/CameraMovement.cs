@@ -14,6 +14,7 @@ public class CameraMovement : MonoBehaviour
         
     }
 
+    // Use LateUpdate so that camera is the last thing to update each frame
     void LateUpdate()
     {
         if (transform.position != target.position)

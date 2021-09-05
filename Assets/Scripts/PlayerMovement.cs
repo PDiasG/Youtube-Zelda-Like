@@ -18,10 +18,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         change = Vector3.zero;
+        // This is using the old Unity Input System. Can be updated to the new one for better support for multiple input devices
+        // Check controller-support branch for updated code
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
     }
 
+    // Use FixedUpdate to guarantee speed across multiple devices
     private void FixedUpdate()
     {
         UpdateAnimationAndMove();

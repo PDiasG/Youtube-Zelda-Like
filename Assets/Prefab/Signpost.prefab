@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6829046865708529768}
   - component: {fileID: 8510351300419417760}
   - component: {fileID: 887682557292779791}
+  - component: {fileID: 8411636313435971023}
   m_Layer: 0
   m_Name: Signpost
   m_TagString: Untagged
@@ -136,3 +137,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5912752, y: 2.4190626}
   m_EdgeRadius: 0
+--- !u!114 &8411636313435971023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997618613189024152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad947a37e8026234f950be293a6be7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogBox: {fileID: 0}
+  dialogText: {fileID: 0}
+  dialog: 
+  playerInRange: 0
