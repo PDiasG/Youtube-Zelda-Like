@@ -19,7 +19,7 @@ public class Signpost : MonoBehaviour
     {
         // This is using the old Unity Input System. Can be updated to the new one for better support for multiple input devices
         // Check controller-support branch for updated code
-        if (Input.GetKeyDown(KeyCode.I) && playerInRange)
+        if (Input.GetButtonDown("Interaction") && playerInRange)
         {
             if (dialogBox.activeInHierarchy)
             {
