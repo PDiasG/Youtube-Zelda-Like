@@ -4,9 +4,11 @@ using UnityEngine;
 
 public enum PlayerState
 {
+    idle,
     walk,
     attack,
-    interact
+    interact,
+    stagger
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -34,11 +36,13 @@ public class PlayerMovement : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
         
-        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack)
+        // If else prevents attacking and moving at the same time
+        // State machine prevents spamming attack button, animation has to complete to attack again
+        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
         {
             StartCoroutine(AttackCoroutine());
         } 
-        else if (currentState == PlayerState.walk)
+        else if (currentState == PlayerState.idle || currentState == PlayerState.walk)
         {
             UpdateAnimationAndMove();
         }
@@ -61,17 +65,33 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveCharacter()
     {
-        change.Normalize();
+        change.Normalize(); // keep same speed diagonally
         rigidbody2d.MovePosition(transform.position + change * speed * Time.fixedDeltaTime);
     }
 
     private IEnumerator AttackCoroutine()
     {
-        animator.SetBool("attacking", true);
         currentState = PlayerState.attack;
+        animator.SetBool("attacking", true);
         yield return null;
         animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.3f);
         currentState = PlayerState.walk;
+    }
+
+    public void Knockback(float knockbackTime)
+    {
+        StartCoroutine(KnockbackCoroutine(knockbackTime));
+    }
+
+    private IEnumerator KnockbackCoroutine(float knockbackTime)
+    {
+        if (rigidbody2d != null)
+        {
+            yield return new WaitForSeconds(knockbackTime);
+            rigidbody2d.velocity = Vector2.zero;
+            currentState = PlayerState.idle;
+            rigidbody2d.velocity = Vector2.zero;
+        }
     }
 }
