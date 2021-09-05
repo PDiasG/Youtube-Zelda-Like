@@ -30,7 +30,7 @@ public class RoomMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !other.isTrigger)
         {
             cam.minPostion = minPosition;
             cam.maxPosition = maxPosition;
@@ -40,6 +40,10 @@ public class RoomMove : MonoBehaviour
             if (needText)
             {
                 StartCoroutine(placeNameCoroutine());
+            } 
+            else
+            {
+                text.SetActive(false);
             }
         }
     }
