@@ -6,6 +6,7 @@ public class PlayerHit : MonoBehaviour
 {
     public float thrust;
     public float knockbackTime;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +41,10 @@ public class PlayerHit : MonoBehaviour
                 rigidbody.AddForce(diff.normalized * thrust, ForceMode2D.Impulse);
 
                 // Only applies knockback once
-                if (other.gameObject.CompareTag("Enemy") && rigidbody.GetComponent<Enemy>().currentState != EnemyState.stagger)
+                if (other.gameObject.CompareTag("Enemy") && other.isTrigger && rigidbody.GetComponent<Enemy>().currentState != EnemyState.stagger)
                 {
                     rigidbody.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                    other.GetComponent<Enemy>().Knockback(rigidbody, knockbackTime);
+                    other.GetComponent<Enemy>().Knockback(rigidbody, knockbackTime, damage);
                 }
                 if (other.gameObject.CompareTag("Player") && rigidbody.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
                 {
