@@ -27,7 +27,7 @@ public abstract class Interactable : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
+        if (ContextClueCondition(other))
         {
             contextOn.Raise();
             playerInRange = true;
@@ -36,10 +36,15 @@ public abstract class Interactable : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
+        if (ContextClueCondition(other))
         {
             contextOff.Raise();
             playerInRange = false;
         }
+    }
+
+    public virtual bool ContextClueCondition(Collider2D other)
+    {
+        return other.CompareTag("Player") && other.isTrigger;
     }
 }

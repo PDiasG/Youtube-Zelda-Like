@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public CustomSignal playerHealthSignal;
+    public Inventory playerInventory;
+    public SpriteRenderer receivedItemSprite;
 
     // Each scene has its own Player object
     // Information is saved and passed between scenes using scriptable objects
@@ -44,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (currentState == PlayerState.interact) return;
+
         change = Vector3.zero;
         // This is using the old Unity Input System. Can be updated to the new one for better support for multiple input devices
         // Check controller-support branch for updated code
@@ -104,7 +108,10 @@ public class PlayerMovement : MonoBehaviour
         yield return null;
         animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.3f);
-        currentState = PlayerState.walk;
+        if (currentState != PlayerState.interact)
+        {
+            currentState = PlayerState.walk;
+        }
     }
 
     // Actions when player is hit
@@ -138,6 +145,26 @@ public class PlayerMovement : MonoBehaviour
             rigidbody2d.velocity = Vector2.zero;
             currentState = PlayerState.idle;
             rigidbody2d.velocity = Vector2.zero;
+        }
+    }
+
+    public void RaiseItem()
+    {
+        if (playerInventory.currentItem != null)
+        {
+            if (currentState != PlayerState.interact)
+            {
+                animator.SetBool("receiveItem", true);
+                currentState = PlayerState.interact;
+                receivedItemSprite.sprite = playerInventory.currentItem.itemSprite;
+            }
+            else
+            {
+                animator.SetBool("receiveItem", false);
+                currentState = PlayerState.idle;
+                receivedItemSprite.sprite = null;
+                playerInventory.currentItem = null;
+            }
         }
     }
 }
