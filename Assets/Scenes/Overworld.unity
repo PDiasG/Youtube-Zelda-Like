@@ -54107,7 +54107,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411636313435971023, guid: a67a19eb04462e64c9a157390e307d65, type: 3}
       propertyPath: dialog
-      value: Entrance to the cave is closed.
+      value: 'Entrance to the cave is closed.
+
+        Try coming back later.'
       objectReference: {fileID: 0}
     - target: {fileID: 8411636313435971023, guid: a67a19eb04462e64c9a157390e307d65, type: 3}
       propertyPath: dialogBox

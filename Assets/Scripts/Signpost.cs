@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Controls readable objects in the map
+ * Currently only supports single window text, look into more advanced dialogs
+ */
+
 public class Signpost : MonoBehaviour
 {
     public GameObject dialogBox;
     public Text dialogText;
-    public string dialog;
+    [TextArea] public string dialog;
     public bool playerInRange;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ *  Controls transition between rooms inside the same scene
+ */
+
 public class RoomMove : MonoBehaviour
 {
     // Using two Vectors for camera position to support rooms with different sizes
@@ -21,11 +25,6 @@ public class RoomMove : MonoBehaviour
     void Start()
     {
         cam = Camera.main.GetComponent<CameraMovement>();
-    }
-
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

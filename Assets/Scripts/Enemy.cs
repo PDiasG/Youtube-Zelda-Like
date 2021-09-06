@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Parent script for all Enemies
+ */
+
+// Simple enemy state machine
 public enum EnemyState
 {
     idle,
@@ -21,10 +26,12 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
-        health = maxHealth.initialValue;
+        // Use the FloatValue prefab as a base for health, so it's easier to customize
+        health = maxHealth.runtimeValue;
     }
 
-    public void Knockback(Rigidbody2D rigidbody, float knockbackTime, float damage)
+    // Actions when enemy is hit
+    public void Hit(Rigidbody2D rigidbody, float knockbackTime, float damage)
     {
         StartCoroutine(KnockbackCoroutine(rigidbody, knockbackTime));
         TakeDamage(damage);
@@ -39,6 +46,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // The force for knockback is added in PlayerHit.cs, this just controls the length of the knockback and reset the body's velocity 
     private IEnumerator KnockbackCoroutine(Rigidbody2D rigidbody, float knockbackTime)
     {
         if (rigidbody != null)

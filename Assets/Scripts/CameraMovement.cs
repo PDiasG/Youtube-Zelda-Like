@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 
+ * Script used to make camera follow a target, clamped to two positions to avoid camera getting out of bounds
+ */
 public class CameraMovement : MonoBehaviour
 {
     public Transform target;

@@ -509,11 +509,14 @@ MonoBehaviour:
   - {fileID: 4795170875342825143}
   - {fileID: 4795170875220974234}
   - {fileID: 4795170875143496786}
-  fullHeart: {fileID: -4430392651179603617, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
-  halfHeart: {fileID: -3276687688264177478, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
-  emptyHeart: {fileID: -9053378900703536071, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
   heartContainers: {fileID: 11400000, guid: a27b1c5782c78954b8d932b398954e05, type: 2}
   playerCurrentHealth: {fileID: 11400000, guid: 13e86807712a1864fb082b3089bff968, type: 2}
+  healthPerContainer: {fileID: 11400000, guid: 2479f1f0df415404aaf1f11bf914bf92, type: 2}
+  fullHeart: {fileID: -4430392651179603617, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
+  threeQuartersHeart: {fileID: 2654447934904345190, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
+  halfHeart: {fileID: -3276687688264177478, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
+  oneQuarterHeart: {fileID: 5069650035751226587, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
+  emptyHeart: {fileID: -9053378900703536071, guid: ca4c6e68c247e8f41ba9303790966fea, type: 3}
 --- !u!1 &4795170875342825141
 GameObject:
   m_ObjectHideFlags: 0

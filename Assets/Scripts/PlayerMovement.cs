@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class controls the player, not just the movement
+ */
+
+// Simple player state machine
 public enum PlayerState
 {
     idle,
@@ -18,18 +23,23 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody2d;
     private Vector3 change;
     private Animator animator;
-    public FloatValue currentHealth;
     public CustomSignal playerHealthSignal;
+
+    // Each scene has its own Player object
+    // Information is saved and passed between scenes using scriptable objects
+    public FloatValue currentHealth;
     public VectorValue startingPosition;
 
     void Start()
     {
-        currentState = PlayerState.walk;
+        currentState = PlayerState.idle;
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        // set initial direction for attack and animation
         animator.SetFloat("moveX", 0);
         animator.SetFloat("moveY", -1);
-        transform.position = startingPosition.initialValue;
+        // Set position according to VectorValue
+        transform.position = startingPosition.runtimeValue;
     }
 
     void Update()
@@ -83,9 +93,11 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
     }
 
-    public void Knockback(float knockbackTime, float damage)
+    // Actions when player is hit
+    public void Hit(float knockbackTime, float damage)
     {
         TakeDamage(damage);
+        // Raise signal to UI in order to update heart displays
         playerHealthSignal.Raise();
         if (currentHealth.runtimeValue > 0)
         {
@@ -93,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Using Scritable objects to keep track of health
     private void TakeDamage(float damage)
     {
         currentHealth.runtimeValue -= damage;
@@ -102,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // The force for knockback is added in PlayerHit.cs, this just controls the length of the knockback and reset the body's velocity 
     private IEnumerator KnockbackCoroutine(float knockbackTime)
     {
         if (rigidbody2d != null)
