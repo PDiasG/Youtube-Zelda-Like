@@ -67,13 +67,27 @@ public class PlayerMovement : MonoBehaviour
         if (change != Vector3.zero)
         {
             MoveCharacter();
-            animator.SetFloat("moveX", change.x);
-            animator.SetFloat("moveY", change.y);
+            SetAnimatorDirection(change);
             animator.SetBool("moving", true);
         }
         else
         {
             animator.SetBool("moving", false);
+        }
+    }
+
+    // Fix bug of activating multiple hitboxes when going to two directions
+    public void SetAnimatorDirection(Vector2 movementInput)
+    {
+        if (Mathf.Abs(movementInput.x) > Mathf.Abs(movementInput.y))
+        {
+            animator.SetFloat("moveX", movementInput.x * (1 / Mathf.Abs(movementInput.x)));
+            animator.SetFloat("moveY", 0);
+        }
+        else
+        {
+            animator.SetFloat("moveX", 0);
+            animator.SetFloat("moveY", movementInput.y * (1 / Mathf.Abs(movementInput.y)));
         }
     }
 

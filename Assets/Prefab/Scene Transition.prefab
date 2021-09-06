@@ -73,3 +73,6 @@ MonoBehaviour:
   sceneToLoad: Overworld
   playerPosition: {x: 0, y: 0}
   positionStorage: {fileID: 11400000, guid: 7c5682e01c19bd74694f520ab3ca6687, type: 2}
+  fadeInPanel: {fileID: 4508685928946538834, guid: 4e76a4c9623647842be43ebaf452d314, type: 3}
+  fadeOutPanel: {fileID: 4350140497019601267, guid: 4746e0c17b3205e4b8732c8e49ab0970, type: 3}
+  fadeWaitTime: 0.33

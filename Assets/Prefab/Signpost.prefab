@@ -153,3 +153,5 @@ MonoBehaviour:
   dialogText: {fileID: 0}
   dialog: 
   playerInRange: 0
+  contextOn: {fileID: 11400000, guid: 530578f487a875247b95101b3f0bd890, type: 2}
+  contextOff: {fileID: 11400000, guid: 4cd8dacb75074354e9bd44238c0f1e55, type: 2}
