@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eff06921d8175644802f6252b030899, type: 3}
-  m_Name: PlayerPosition
+  m_Script: {fileID: 11500000, guid: 6bf8c3624da8c32409d77454c33a4d75, type: 3}
+  m_Name: OverworldChestA
   m_EditorClassIdentifier: 
-  initialValue: {x: 0, y: 0}
-  runtimeValue: {x: 0, y: 0}
+  initialValue: 0
+  runtimeValue: 0

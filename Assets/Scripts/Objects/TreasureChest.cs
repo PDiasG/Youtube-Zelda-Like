@@ -42,8 +42,8 @@ public class TreasureChest : Interactable
         playerInventory.AddItem(content);
         playerInventory.currentItem = content;
         raiseItem.Raise();
-        isOpen = true;
         contextOff.Raise();
+        isOpen = true;
         animator.SetBool("open", true);
     }
 

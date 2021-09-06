@@ -10,8 +10,15 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     public string sceneToLoad; // could change this to reference of scene in order to avoid breaking when changing scene name
+
     public Vector2 playerPosition;
+    public Vector2 cameraNewMax;
+    public Vector2 cameraNewMin;
+
     public VectorValue positionStorage;
+    public VectorValue cameraMin;
+    public VectorValue cameraMax;
+
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
     public float fadeWaitTime;
@@ -29,9 +36,6 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            // We store the new player position in a VectorValue scriptable object
-            // When new scene is loaded player is set to that position
-            positionStorage.runtimeValue = playerPosition;
             other.gameObject.SetActive(false);
             StartCoroutine(FadeCoroutine());
         }
@@ -44,10 +48,20 @@ public class SceneTransition : MonoBehaviour
             GameObject panel = Instantiate(fadeOutPanel, Vector3.zero, Quaternion.identity) as GameObject;
         }
         yield return new WaitForSeconds(fadeWaitTime);
+        ResetCameraAndPlayer();
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneToLoad);
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
+    }
+
+    public void ResetCameraAndPlayer()
+    {
+        // We store the new player position and camera limits in a VectorValue scriptable object
+        // When new scene is loaded player is set to that position and camera is bounded correctly
+        positionStorage.runtimeValue = playerPosition;
+        cameraMax.runtimeValue = cameraNewMax;
+        cameraMin.runtimeValue = cameraNewMin;
     }
 }

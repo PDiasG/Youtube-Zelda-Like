@@ -25,6 +25,7 @@ public class HeartManager : MonoBehaviour
     void Start()
     {
         InitHearts();
+        UpdateHearts();
     }
 
     // All hearts[] have to start turned off, they are set active in this function

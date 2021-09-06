@@ -12,10 +12,14 @@ public class CameraMovement : MonoBehaviour
     public Vector2 maxPosition;
     public Vector2 minPostion;
     public Animator animator;
+    public VectorValue cameraMax;
+    public VectorValue cameraMin;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        maxPosition = cameraMax.runtimeValue;
+        minPostion = cameraMin.runtimeValue;
     }
 
     // Use LateUpdate so that camera is the last thing to update each frame
