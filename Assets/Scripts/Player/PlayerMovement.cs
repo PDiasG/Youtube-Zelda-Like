@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public CustomSignal playerHealthSignal;
     public Inventory playerInventory;
     public SpriteRenderer receivedItemSprite;
+    public CustomSignal kickSignal;
 
     // Each scene has its own Player object
     // Information is saved and passed between scenes using scriptable objects
@@ -139,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
     // The force for knockback is added in PlayerHit.cs, this just controls the length of the knockback and reset the body's velocity 
     private IEnumerator KnockbackCoroutine(float knockbackTime)
     {
+        kickSignal.Raise();
         if (rigidbody2d != null)
         {
             yield return new WaitForSeconds(knockbackTime);

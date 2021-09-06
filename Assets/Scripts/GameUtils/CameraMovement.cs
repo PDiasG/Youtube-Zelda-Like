@@ -11,10 +11,11 @@ public class CameraMovement : MonoBehaviour
     public float smoothing;
     public Vector2 maxPosition;
     public Vector2 minPostion;
+    public Animator animator;
 
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Use LateUpdate so that camera is the last thing to update each frame
@@ -28,5 +29,17 @@ public class CameraMovement : MonoBehaviour
 
             transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
         }
+    }
+
+    public void Kick()
+    {
+        animator.SetBool("kickActive", true);
+        StartCoroutine(KickCoroutine());
+    }
+
+    public IEnumerator KickCoroutine()
+    {
+        yield return null;
+        animator.SetBool("kickActive", false);
     }
 }

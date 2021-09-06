@@ -31,9 +31,13 @@ public class RoomMove : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
+
+            float smoothing = cam.smoothing;
+            cam.smoothing = 0.02f; // nice effect for room transition
             cam.minPostion = minPosition;
             cam.maxPosition = maxPosition;
             other.transform.position += playerChange;
+            StartCoroutine(SmoothingCoroutine(smoothing));
 
             // Add support for Place Name title cards
             if (needText)
@@ -45,6 +49,13 @@ public class RoomMove : MonoBehaviour
                 text.SetActive(false);
             }
         }
+    }
+
+    // Return cam smoothing to actual value after shorty room transition effect
+    private IEnumerator SmoothingCoroutine(float smoothing)
+    {
+        yield return new WaitForSeconds(.2f);
+        cam.smoothing = smoothing;
     }
 
     // Can add other animations or sound effect here for a better visual

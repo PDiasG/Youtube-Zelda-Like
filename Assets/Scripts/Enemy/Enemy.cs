@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public string enemyName;
     public int baseDamage;
     public float moveSpeed;
+    public GameObject deathEffect;
 
     void Awake()
     {
@@ -37,11 +38,21 @@ public class Enemy : MonoBehaviour
         TakeDamage(damage);
     }
 
+    private void DeathEffect()
+    {
+        if (deathEffect != null)
+        {
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 1);
+        }
+    }
+
     private void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
         {
+            DeathEffect();
             this.gameObject.SetActive(false);
         }
     }
