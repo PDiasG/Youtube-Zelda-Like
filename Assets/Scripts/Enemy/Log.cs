@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ using UnityEngine;
 public class Log : Enemy
 {
     public Transform target;
-    private Rigidbody2D _rigidbody;
+    protected Rigidbody2D _rigidbody;
     public float chaseRadius;
     public float attackRadius;
     public Transform homePosition;
@@ -27,6 +27,7 @@ public class Log : Enemy
         target = GameObject.FindWithTag("Player").transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        animator.SetBool("wakeUp", true);
     }
 
     void FixedUpdate()
@@ -44,7 +45,7 @@ public class Log : Enemy
     }
 
     // This could be refactored to a child of enemy called "FollowEnemy" and have Log be a child of that, so logic can be reused for different enemies
-    void CheckDistance()
+    public virtual void CheckDistance()
     {
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius)
@@ -62,14 +63,13 @@ public class Log : Enemy
         else if (dist > chaseRadius)
         {
             // Go back to sleep if player has gone too far
-            // TODO: Add logic to return home
             ChangeState(EnemyState.idle);
             animator.SetBool("wakeUp", false);
         }
     }
 
     // Controls the direction the log is moving so BlendTree can change the animation that is playing
-    private void ChangeAnim(Vector2 direction)
+    protected void ChangeAnim(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
@@ -95,14 +95,14 @@ public class Log : Enemy
         }
     }
 
-    private void SetAnimFloat(Vector2 setVector)
+    protected void SetAnimFloat(Vector2 setVector)
     {
         animator.SetFloat("moveX", setVector.x);
         animator.SetFloat("moveY", setVector.y);
     }
 
     // Avoid updating the state machine to the same state
-    private void ChangeState(EnemyState newState)
+    protected void ChangeState(EnemyState newState)
     {
         if (currentState != newState)
         {
