@@ -9,11 +9,9 @@ public enum DoorType
     button
 }
 
-public class Door : Interactable
+public abstract class Door : Interactable
 {
-    public DoorType doorType;
     public bool isOpen;
-    public Inventory playerInventory;
     private SpriteRenderer doorSprite;
     private BoxCollider2D physicsCollider;
 
@@ -23,19 +21,13 @@ public class Door : Interactable
         physicsCollider = GetComponentInParent<BoxCollider2D>();
     }
 
-    public override void Interact() 
-    { 
-        if (doorType == DoorType.key && playerInventory.numberOfKeys > 0)
-        {
-            playerInventory.numberOfKeys--;
-            Open();
-        }
-    }
+    public abstract override void Interact();
 
     public void Open()
     {
         doorSprite.gameObject.SetActive(false);
         physicsCollider.gameObject.SetActive(false);
+        isOpen = true;
     }
 
     public void Close()

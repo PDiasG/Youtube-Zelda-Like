@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e54d9b390092edf449b496717cb9cad3, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: 6bf8c3624da8c32409d77454c33a4d75, type: 3}
+  m_Name: Switch C
   m_EditorClassIdentifier: 
-  currentItem: {fileID: 0}
-  items: []
-  numberOfKeys: 9
-  coins: 15
+  initialValue: 0
+  runtimeValue: 0

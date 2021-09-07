@@ -327,6 +327,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  id: player
 --- !u!114 &337790787768873605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +356,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  id: player
 --- !u!1 &3447602044949907417
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +699,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  id: 
 --- !u!1 &6893060477680195445
 GameObject:
   m_ObjectHideFlags: 0

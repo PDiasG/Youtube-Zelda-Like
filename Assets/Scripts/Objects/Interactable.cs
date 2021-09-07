@@ -12,10 +12,11 @@ public abstract class Interactable : MonoBehaviour
     // Sginals to control player's context clues
     public CustomSignal contextOn;
     public CustomSignal contextOff;
+    private string signalId = "player"; // interactables will only send signals to the player
 
     public abstract void Interact();
 
-    void Update()
+    protected virtual void Update()
     {
         // This is using the old Unity Input System. Can be updated to the new one for better support for multiple input devices
         // Check controller-support branch for updated code
@@ -29,7 +30,7 @@ public abstract class Interactable : MonoBehaviour
     {
         if (ContextClueCondition(other))
         {
-            contextOn.Raise();
+            contextOn.Raise(signalId);
             playerInRange = true;
         }
     }
@@ -38,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
     {
         if (ContextClueCondition(other))
         {
-            contextOff.Raise();
+            contextOff.Raise(signalId);
             playerInRange = false;
         }
     }
