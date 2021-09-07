@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194929151602391067}
   - component: {fileID: 994861465675712534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ContextClues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7383645290806178493}
   - component: {fileID: 1170533856982924507}
   - component: {fileID: 2043280464907689639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Area Log
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5528798393863124927}
   - component: {fileID: 2012909214629034164}
   - component: {fileID: 7901040352418002642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sleepy Log
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9163759841964913170}
   - component: {fileID: 8094874237316973087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ContextClues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
