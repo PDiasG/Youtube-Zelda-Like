@@ -1924,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7044615805631157394, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.0711918
+      value: -2.05
       objectReference: {fileID: 0}
     - target: {fileID: 7044615805631157394, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1957,6 +1957,14 @@ PrefabInstance:
     - target: {fileID: 7044615805631157394, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044615805631157399, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}
+      propertyPath: contextClueId
+      value: sleepyLog_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901040352418002642, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}
+      propertyPath: id
+      value: sleepyLog_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc4aa82af14836342a6c56d1d6a36dff, type: 3}

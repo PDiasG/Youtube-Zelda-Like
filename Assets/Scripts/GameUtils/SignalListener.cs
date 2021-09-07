@@ -13,6 +13,8 @@ public class SignalListener : MonoBehaviour
     public CustomSignal signal;
     // Function that will be executed when signal is raised
     public UnityEvent signalEvent;
+    // Id to reuse signal in multiple entities
+    public string id;
 
     // Add itself to list of listeners for that signal
     private void OnEnable()
@@ -31,5 +33,11 @@ public class SignalListener : MonoBehaviour
     public void OnSignalRaised()
     {
         signalEvent.Invoke();
+    }
+
+    // Executed event when signal is raised
+    public void OnSignalRaised(string id)
+    {
+        if (this.id == id) signalEvent.Invoke();
     }
 }

@@ -14,6 +14,7 @@ public class PatrolLog : Log
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius)
         {
+            contextClueOn.Raise(contextClueId);
             // Don't move if is staggered or attacking
             if (currentState == EnemyState.idle || currentState == EnemyState.walk)
             {
@@ -25,6 +26,7 @@ public class PatrolLog : Log
         }
         else if (dist > chaseRadius)
         {
+            contextClueOff.Raise(contextClueId);
             // Go back to patrolling if player is too far away
             if (Vector3.Distance(transform.position, path[currentPoint].position) < roudingDistance)
             {

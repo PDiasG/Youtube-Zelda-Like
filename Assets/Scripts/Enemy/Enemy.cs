@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     public int baseDamage;
     public float moveSpeed;
     public GameObject deathEffect;
+    public CustomSignal kickSignal;
 
     void Awake()
     {
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        kickSignal.Raise();
         health -= damage;
         if (health <= 0)
         {

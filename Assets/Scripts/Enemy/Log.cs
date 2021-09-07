@@ -14,6 +14,11 @@ public class Log : Enemy
     public Transform homePosition;
     public Animator animator;
 
+    // signal id
+    public CustomSignal contextClueOn;
+    public CustomSignal contextClueOff;
+    public string contextClueId;
+
     // Debugging purposes only, draw chase and attack radius
     void OnDrawGizmos()
     {
@@ -39,6 +44,7 @@ public class Log : Enemy
         }
         else
         {
+            contextClueOff.Raise(contextClueId);
             ChangeState(EnemyState.idle);
             animator.SetBool("wakeUp", false);
         }
@@ -50,6 +56,7 @@ public class Log : Enemy
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius)
         {
+            contextClueOn.Raise(contextClueId);
             // Don't move if is staggered or attacking
             if (currentState == EnemyState.idle || currentState == EnemyState.walk)
             {
@@ -62,6 +69,7 @@ public class Log : Enemy
         }
         else if (dist > chaseRadius)
         {
+            contextClueOff.Raise(contextClueId);
             // Go back to sleep if player has gone too far
             ChangeState(EnemyState.idle);
             animator.SetBool("wakeUp", false);
