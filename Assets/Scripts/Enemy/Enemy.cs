@@ -23,8 +23,12 @@ public class Enemy : MonoBehaviour
     public string enemyName;
     public int baseDamage;
     public float moveSpeed;
+    public CustomSignal enemyHealthSignal;
     public GameObject deathEffect;
     public CustomSignal kickSignal;
+    public Vector2 homePosition;
+    public float homeRadius;
+    public string signalId;
 
     void Awake()
     {
@@ -32,11 +36,19 @@ public class Enemy : MonoBehaviour
         health = maxHealth.runtimeValue;
     }
 
+    protected virtual void OnEnable()
+    {
+        transform.position = homePosition;
+        health = maxHealth.runtimeValue;
+        currentState = EnemyState.idle;
+    }
+
     // Actions when enemy is hit
     public void Hit(Rigidbody2D rigidbody, float knockbackTime, float damage)
     {
         StartCoroutine(KnockbackCoroutine(rigidbody, knockbackTime));
         TakeDamage(damage);
+        enemyHealthSignal.Raise();
     }
 
     private void DeathEffect()
@@ -50,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        kickSignal.Raise();
+        kickSignal.Raise(signalId);
         health -= damage;
         if (health <= 0)
         {

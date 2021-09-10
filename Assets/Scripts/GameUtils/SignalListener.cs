@@ -38,6 +38,6 @@ public class SignalListener : MonoBehaviour
     // Executed event when signal is raised
     public void OnSignalRaised(string id)
     {
-        if (this.id == id) signalEvent.Invoke();
+        if (this.id == id || this.id == "") signalEvent.Invoke();
     }
 }

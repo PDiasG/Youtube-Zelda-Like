@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcd63c95c0b4af449a49a4f8f8d93c0c, type: 3}
-  m_Name: TwoHitEnemyHealth
+  m_Name: EnemyHeartContainers
   m_EditorClassIdentifier: 
-  initialValue: 2
-  runtimeValue: 2
+  initialValue: 5
+  runtimeValue: 5

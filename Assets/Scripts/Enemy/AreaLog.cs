@@ -11,7 +11,7 @@ public class AreaLog : Log
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius && boundary.bounds.Contains(target.transform.position) )
         {
-            contextClueOn.Raise(contextClueId);
+            contextClueOn.Raise(signalId);
             // Don't move if is staggered or attacking
             if (currentState == EnemyState.idle || currentState == EnemyState.walk)
             {
@@ -24,10 +24,22 @@ public class AreaLog : Log
         }
         else if (dist > chaseRadius || !boundary.bounds.Contains(target.transform.position) )
         {
-            contextClueOff.Raise(contextClueId);
-            // Go back to sleep if player has gone too far
-            ChangeState(EnemyState.idle);
-            animator.SetBool("wakeUp", false);
+            contextClueOff.Raise(signalId);
+            // Go back to home position if player has gone too far
+            float distToHome = Vector3.Distance(homePosition, transform.position);
+            if (distToHome <= homeRadius)
+            {
+                ChangeState(EnemyState.idle);
+                animator.SetBool("wakeUp", false);
+            }
+            else
+            {
+                Vector3 temp = Vector3.MoveTowards(transform.position, homePosition, moveSpeed * Time.fixedDeltaTime);
+                ChangeAnim(temp - transform.position);
+                _rigidbody.MovePosition(temp);
+                ChangeState(EnemyState.walk);
+                animator.SetBool("wakeUp", true);
+            }
         }
     }
 }

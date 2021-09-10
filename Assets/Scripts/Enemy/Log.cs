@@ -11,13 +11,11 @@ public class Log : Enemy
     protected Rigidbody2D _rigidbody;
     public float chaseRadius;
     public float attackRadius;
-    public Transform homePosition;
     public Animator animator;
 
     // signal id
     public CustomSignal contextClueOn;
     public CustomSignal contextClueOff;
-    public string contextClueId;
 
     // Debugging purposes only, draw chase and attack radius
     void OnDrawGizmos()
@@ -44,7 +42,7 @@ public class Log : Enemy
         }
         else
         {
-            contextClueOff.Raise(contextClueId);
+            contextClueOff.Raise(signalId);
             ChangeState(EnemyState.idle);
             animator.SetBool("wakeUp", false);
         }
@@ -56,7 +54,7 @@ public class Log : Enemy
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius)
         {
-            contextClueOn.Raise(contextClueId);
+            contextClueOn.Raise(signalId);
             // Don't move if is staggered or attacking
             if (currentState == EnemyState.idle || currentState == EnemyState.walk)
             {
@@ -69,10 +67,22 @@ public class Log : Enemy
         }
         else if (dist > chaseRadius)
         {
-            contextClueOff.Raise(contextClueId);
-            // Go back to sleep if player has gone too far
-            ChangeState(EnemyState.idle);
-            animator.SetBool("wakeUp", false);
+            contextClueOff.Raise(signalId);
+            // Go back to home position if player has gone too far
+            float distToHome = Vector3.Distance(homePosition, transform.position);
+            if (distToHome <= homeRadius)
+            {
+                ChangeState(EnemyState.idle);
+                animator.SetBool("wakeUp", false);
+            }
+            else
+            {
+                Vector3 temp = Vector3.MoveTowards(transform.position, homePosition, moveSpeed * Time.fixedDeltaTime);
+                ChangeAnim(temp - transform.position);
+                _rigidbody.MovePosition(temp);
+                ChangeState(EnemyState.walk);
+                animator.SetBool("wakeUp", true);
+            }
         }
     }
 

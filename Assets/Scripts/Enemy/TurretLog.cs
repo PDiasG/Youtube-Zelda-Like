@@ -24,7 +24,7 @@ public class TurretLog : Log
         float dist = Vector3.Distance(target.position, transform.position);
         if (dist <= chaseRadius && dist > attackRadius)
         {
-            contextClueOn.Raise(contextClueId);
+            contextClueOn.Raise(signalId);
             // Don't move if is staggered or attacking
             if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && canFire)
             {
@@ -38,7 +38,7 @@ public class TurretLog : Log
         }
         else if (dist > chaseRadius)
         {
-            contextClueOff.Raise(contextClueId);
+            contextClueOff.Raise(signalId);
             // Go back to sleep if player has gone too far
             ChangeState(EnemyState.idle);
             animator.SetBool("wakeUp", false);
